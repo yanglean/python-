@@ -1,1 +1,43 @@
-这是pandas的简单随笔
+pandas用于处理表格型或异质型数据的，与numpy相反，numpy更适合处理同质型数组数据
+
+pandas的一般的导入方法为 
+import pandas as pd 
+
+常用的类为 Series 和 DataFrame,一般导入方法为
+from pandas import Series,DataFrame
+
+
+pandas 的数据结构一般常用的有两种：Series 和 DataFrame
+Series 为一种一维的数组型的对象，其包含一个值序列和数据标签
+obj=pd.Series([1,2,3,4])
+obj.values  #obj的值
+obj.index  #obj的索引 
+
+
+可以通过numpy的数据的标签来进行索引
+obj=pd.Series([2,2,3,6],index=['a','d','f','c'])
+print(obj['d'])
+
+Series 操作对象可以使用数学函数：
+obj[obj>2]
+obj*2
+np.exp(obj)
+
+如果有一个字典，可以直接将字典导入当做Series使用
+dic={'a':20,'b':49,'v':90}
+obj=pd.Series(dic)
+
+通过使用字典可以直接导入，如果想将字典里的导入数据进行排序或者进行数据截取。则
+dic={'a':20,'b':49,'v':90}
+dic_dic=['z','v','b','a']
+print(pd.Series(dic,index=dic_dic))
+
+可以使用isnull()，notnull()来标记缺失值的数据情况
+pd.isnull(obj) 或者obj.isnull()
+
+自动对齐索引进行Seriess是个有效的特性，会自动匹配索引的值进行数据的数学操作,和数据库的join类似。
+
+obj1=pd.Series([1,2,4,5],index=['a','b','c','d'])
+obj2=pd.Series([2,3,5,6],index=['b','c','e','f'])
+obj3=obj1+obj2
+print(obj3)
